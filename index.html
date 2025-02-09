@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ My Valentine ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #ff8585;
+            --glow-color: rgba(255, 182, 193, 0.7);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            font-family: 'Dancing Script', cursive;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            color: white;
+            font-size: 4em;
+            text-shadow: 0 0 10px var(--glow-color),
+                         0 0 20px var(--glow-color),
+                         0 0 30px var(--glow-color);
+            margin-bottom: 30px;
+            animation: glowText 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowText {
+            from {
+                text-shadow: 0 0 10px var(--glow-color),
+                            0 0 20px var(--glow-color),
+                            0 0 30px var(--glow-color);
+            }
+            to {
+                text-shadow: 0 0 20px var(--glow-color),
+                            0 0 30px var(--glow-color),
+                            0 0 40px var(--glow-color),
+                            0 0 50px var(--glow-color);
+            }
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 0 15px var(--glow-color);
+            font-family: 'Dancing Script', cursive;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        #yesBtn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        #noBtn:hover {
+            transform: scale(0.9) rotate(-5deg);
+        }
+
+        .hearts, .flowers, .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart, .flower, .star {
+            position: absolute;
+            animation: float-up 6s ease-in infinite;
+        }
+
+        .heart {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            transform: rotate(45deg);
+            opacity: 0.8;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: inherit;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before { left: -10px; }
+        .heart::after { top: -10px; }
+
+        .flower {
+            font-size: 2em;
+            animation: spin 4s linear infinite;
+        }
+
+        .star {
+            font-size: 1.5em;
+            color: white;
+            text-shadow: 0 0 10px gold;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px var(--glow-color);
+            z-index: 1000;
+            animation: popIn 0.5s ease-out, glow 2s infinite alternate;
+        }
+
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(-180deg); }
+            100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px var(--glow-color); }
+            100% { box-shadow: 0 0 40px var(--glow-color), 0 0 60px var(--glow-color); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+    <div class="flowers"></div>
+    <div class="stars"></div>
+    <div class="container">
+        <h1>Will You Be My Valentine?</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes, I'd love to! 💖</button>
+            <button id="noBtn">No 💔</button>
+        </div>
+    </div>
+    <div class="message" id="acceptMessage">
+        <h2>You've Made Me The Happiest Person! 💑</h2>
+        <p>My heart beats only for you! -N 💝</p>
+    </div>
+
+    <script>
+        const emojis = ['❤️', '🌹', '✨', '💖', '💝', '💕', '🌸', '💮'];
+        
+        function createFloatingElement(type) {
+            const element = document.createElement('div');
+            element.classList.add(type);
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            if (type !== 'heart') {
+                element.innerHTML = randomEmoji;
+            }
+            
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            element.style.opacity = Math.random();
+            element.style.fontSize = Math.random() * 20 + 20 + 'px';
+            
+            document.querySelector('.' + type + 's').appendChild(element);
+            setTimeout(() => element.remove(), 6000);
+        }
+
+        // Adjust number of elements based on screen size
+        function getElementCount() {
+            return window.innerWidth < 768 ? 
+                { hearts: 10, flowers: 8, stars: 8 } : 
+                { hearts: 20, flowers: 15, stars: 15 };
+        }
+
+        function startAnimations() {
+            const counts = getElementCount();
+            
+            setInterval(() => createFloatingElement('heart'), 3000 / counts.hearts);
+            setInterval(() => createFloatingElement('flower'), 3000 / counts.flowers);
+            setInterval(() => createFloatingElement('star'), 3000 / counts.stars);
+        }
+
+        // Start animations and handle resize
+        startAnimations();
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.hearts > *, .flowers > *, .stars > *').forEach(el => el.remove());
+            startAnimations();
+        });
+
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const message = document.getElementById('acceptMessage');
+
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        yesBtn.addEventListener('click', () => {
+            message.style.display = 'block';
+            noBtn.style.display = 'none';
+            yesBtn.style.display = 'none';
+            document.querySelector('h1').style.display = 'none';
+            
+            // Create celebration burst
+            for(let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    createFloatingElement('heart');
+                    createFloatingElement('flower');
+                    createFloatingElement('star');
+                }, i * 50);
+            }
+        });
+    </script>
+</body>
+</html>
